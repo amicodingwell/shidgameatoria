@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include "playercreation.hpp"
 #include "monsters.hpp"
+#include "randomoption.hpp"
 using namespace std;
 
 
@@ -8,17 +10,19 @@ using namespace std;
 
 int main() {
 
-    cout << smallOgre.monsterName <<  smallOgre.monsterHealth << endl;
+
+    cout << smallOgre.monsterListNum;
+
     //creates a player from the player object
     Player player;
     //runs the player creation code
     player.playerCreation();
 
 
-    std::cout << player.playerRace;
+
 
 // Combat choices
-    cout << "What would you like to do?" << endl;
+    std::cout << "What would you like to do?" << endl;
 
     std::cout << "1. Attack 2. Defend 3. Potion 4. Player Info" << std::endl;
 
