@@ -3,10 +3,8 @@
 #include "playercreation.hpp"
 using namespace std;
 
-string temporaryOption = "";
-
 void playerCreationInsert(){
-    Player player{"","","","",0,0,0,0};
+    Player player;
     player.playerCreation();
     return;
 }
@@ -66,22 +64,4 @@ void combatLoop(){
     combatChoice();
 
     return;
-}
-
-int main() {
-    //creates a player from the Player object    
-    //Player player;
-    //runs the player creation code
-    //player.playerCreation();
-
-    playerCreationInsert();
-    //runs combat loop
-    combatLoop();
-
-    
-    cout << "You've fought well, but game over. Your experience is: " << player.playerExperience << "." << endl;
-    cout << "Type exit to exit." << endl;
-    cout << player.playerHealth;
-    cin >> temporaryOption;
-    return 0;
 }

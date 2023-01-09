@@ -17,10 +17,10 @@ class Monster {
 
 
 //monsters
-Monster smallOgre{"Small Ogre ", 10, 3, 3, "measly club swing", "headbutt", 1};
-Monster largeOgre{"Large Ogre ", 13, 5, 4, "heavy club swing", "headcrusher", 2};
-Monster smallSpider{"Small Spider ", 5, 1, 1, "pinprick bite", "venom drizzle", 3};
-Monster largeSpider{"Large Spider ", 7, 2, 2, "owie bite", "venom plunge", 4};
+Monster smallOgre{"Small Ogre", 10, 3, 3, "measly club swing", "headbutt", 1};
+Monster largeOgre{"Large Ogre", 13, 5, 4, "heavy club swing", "headcrusher", 2};
+Monster smallSpider{"Small Spider", 5, 1, 1, "pinprick bite", "venom drizzle", 3};
+Monster largeSpider{"Large Spider", 7, 2, 2, "owie bite", "venom plunge", 4};
 
 //monster list
 void MList() {
