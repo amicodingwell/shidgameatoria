@@ -8,6 +8,7 @@ class Player {
         string playerRace = "";
         string playerName = "";
         string playerClass = "";
+        string playerWeapon = "";
         int playerHealth = 0;
         int playerDamage = 0;
         int playerDefence = 0;
@@ -66,7 +67,8 @@ class Player {
                         playerClass = "Warrior";
                         playerHealth += 10;
                         playerDamage += 5;           
-                        playerDefence += 10;            
+                        playerDefence += 10;   
+                        playerWeapon = "Sword";         
                         break;
                     case 2:
                         std::cout << "Is that a dagger, rogue?" << endl;
@@ -74,13 +76,15 @@ class Player {
                         playerHealth += 5;
                         playerDamage += 10;           
                         playerDefence += 10; 
+                        playerWeapon = "Dagger";
                         break;
                     case 3:
                         std::cout << "Stop yelling, berserker.." << endl;
                         playerClass = "Berserker";
                         playerHealth += 5;
                         playerDamage += 15;           
-                        playerDefence += 5; 
+                        playerDefence += 5;
+                        playerWeapon = "Axe";
                         break;
                     default:
                         std::cout << "You need to choose again." << endl;

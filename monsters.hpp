@@ -5,14 +5,15 @@ using namespace std;
 //Class that makes monsters
 class Monster {
     public:
-        string monsterName = "";
+        std::string monsterName = "";
         int monsterHealth = 0;
         int monsterDamage = 0;
         int monsterDefence = 0;
 };
 
-Monster smallOgre;
-smallOgre.monsterName = "Small Ogre";
-smallOgre.monsterHealth = 10;
-smallOgre.monsterDamage = 3;
-smallOgre.monsterDefence = 3;
+
+//monster list
+Monster smallOgre{"Small Ogre ", 10, 3, 3};
+Monster largeOgre{"Large Ogre ", 13, 5, 4};
+Monster smallSpider{"Small Spider ", 5, 1, 1};
+Monster largeSpider{"Large Spider ", 7, 2, 2};

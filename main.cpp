@@ -5,9 +5,10 @@ using namespace std;
 
 
 
+
 int main() {
 
-    cout << smallOgre.monsterName;
+    cout << smallOgre.monsterName <<  smallOgre.monsterHealth << endl;
     //creates a player from the player object
     Player player;
     //runs the player creation code
