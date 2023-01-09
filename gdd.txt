@@ -1,4 +1,2 @@
 SHIDGAMEATORIA
 
-/*     std::cout << "What would you like to do?" << std::endl;
-    std::cout << "1. Attack 2. Defend 3. Potion" << std::endl; */

@@ -1,11 +1,13 @@
 #include <iostream>
 #include "playercreation.hpp"
+#include "monsters.hpp"
 using namespace std;
 
 
 
 int main() {
 
+    cout << smallOgre.monsterName;
     //creates a player from the player object
     Player player;
     //runs the player creation code
