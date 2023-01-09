@@ -2,7 +2,7 @@
 #include "monsters.hpp"
 #include "playercreation.hpp"
 using namespace std;
-
+//temp option for ending the program
 string temporaryOption = "";
 
 void playerCreationInsert(){
@@ -11,6 +11,7 @@ void playerCreationInsert(){
     return;
 }
 
+//attempting to occupy currentPlayerHealth with max health
  int currentPlayerHealth = player.playerHealth;
  int currentMonsterHealth = smallOgre.monsterHealth;  
 
@@ -69,16 +70,13 @@ void combatLoop(){
 }
 
 int main() {
-    //creates a player from the Player object    
-    //Player player;
-    //runs the player creation code
-    //player.playerCreation();
 
+    //runs the player creation code
     playerCreationInsert();
     //runs combat loop
     combatLoop();
 
-    
+    //Outro
     cout << "You've fought well, but game over. Your experience is: " << player.playerExperience << "." << endl;
     cout << "Type exit to exit." << endl;
     cout << player.playerHealth;
