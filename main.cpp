@@ -1,95 +1,235 @@
 #include <iostream>
 #include "monsters.hpp"
-#include "playercreation.hpp"
+#include <ctime>
 using namespace std;
-//temp option for ending the program
-string temporaryOption = "";
 
+int potions = 3;
+int currentPotions = potions;
+class Player {
+    public:
+    string playerName = "";
+    string playerRace = "";
+    string playerClass = "";
+    string playerWeapon = "";
+    float playerHealth = 0;
+    int playerDamage = 0;
+    int playerDefence = 0;
+    int playerExperience = 0;
+    float currentPlayerHealth= playerHealth;
+};
 
-//Intro to fight
-void combatIntro(){
-    cout << "Oh no, it's a fuckin' " << smallOgre.monsterName << ". " << "It has " << smallOgre.monsterHealth << "HP." << endl;
-    //cout << "Your health is " << currentPlayerHealth << "." << endl;
-    smallOgre;
-    player;
-    int currentPlayerHealth = player.playerHealth;
-    int currentMonsterHealth = smallOgre.monsterHealth;
-    return;
+Player player;
+
+//Rest, potions, wander function
+
+void rpwFunc(){
+
+   
+    do { 
+        if (player.currentPlayerHealth >= 1){
+        std::cout << "Status: " << endl;
+        std::cout << "Name: " << player.playerName << " Race: " << player.playerRace << " Class: " << player.playerClass << " HP: " << player.currentPlayerHealth << " ATK: " << player.playerDamage << " DEF: " << player.playerDefence << " EXP: " << player.playerExperience << endl;
+        std::cout << "You find yourself being able to choose between 1. Resting (Heal 40% hp) or 2. Collecting 3 potions" << endl;
+        int playerOption = 0;
+        std::cin >> playerOption;
+
+            if (playerOption == 1){
+                player.currentPlayerHealth += player.playerHealth / 100 * 40;
+                if (player.currentPlayerHealth >= player.playerHealth){
+                    player.currentPlayerHealth = player.playerHealth;
+                    std::cout << "You feel rested, you go for a wander." << endl;
+                    break;
+                }else{            
+                    std::cout << "You feel rested, but still a bit wounded. You go for a wander." << endl;
+                    break;
+                }
+            } else if (playerOption == 2){
+                currentPotions += 3;
+                std::cout << "You have " << currentPotions << " potions. You go for a wander." << endl;
+                break;
+            } else {
+                std::cout << "Have it your way." << endl;
+                break;
+            }           
+    } else {
+        std::cout << "You have died. Welcome to hell." << endl;
+            
+    }
+}while(player.currentPlayerHealth >= 1);
 }
 
-// Combat choices
 
-void combatChoice(){
-    
-
-    cout << "What would you like to do?" << endl;
-    cout << "1. Attack 2. Defend 3. Potion" << endl;
+void combatFunc(){
     int playerOption = 0;
-    std::cin >> playerOption;    
+    float currentMonsterHealth = smallOgre.monsterHealth;
+    float combatMonsterDamage = 0;
+    float combatPlayerDamage = 0;
 
-    switch (playerOption) {
+    std::cout << "Oh shit it's a " << smallOgre.monsterName << endl;
+    std::cout << "You have " << player.currentPlayerHealth << " HP. What will you do?" << endl;
+
+    do {
+        std::cout << "Would you like to 1. Attack 2. Defend 3. Potion 4. Status";
+        std::cin >> playerOption;
+        switch (playerOption){
         case 1:
-            cout << "You chose to attack." << endl;
+            std::cout << "You attack the enemy for " << (player.playerDamage / smallOgre.monsterDefence) << " damage." << endl;
+            combatPlayerDamage = (player.playerDamage / smallOgre.monsterDefence);
+            currentMonsterHealth -= combatPlayerDamage;
+            std::cout << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
+
+            std::cout << "You take " << (player.playerDefence / smallOgre.monsterDamage) << " damage." << endl;
+            combatMonsterDamage = (smallOgre.monsterDamage / player.playerDefence);
+            player.currentPlayerHealth -= combatMonsterDamage;
+            std::cout << "Your health is " << player.currentPlayerHealth << "." << endl;
             break;
-        case 2: 
-            cout << "You chose to defend." << endl;
+
+        case 2:
+            //std::cout << "You defend from the enemy's attack. You take " << currentPlayerHealth - player.playerHealth + (p) << " damage." << endl;
+            player.currentPlayerHealth -= (player.playerDefence - (smallOgre.monsterDamage / 0.5));
+            std::cout << "You defend from the enemy's attack." << endl;
+            std::cout << "Your health is " << player.currentPlayerHealth << "." << endl;
             break;
+
         case 3:
-            cout << "You chose to use a potion." << endl;
+            if (currentPotions > 0) {
+
+                player.currentPlayerHealth += 10;
+                
+                if(player.currentPlayerHealth >= player.playerHealth){
+                    player.currentPlayerHealth = player.playerHealth;
+                    std::cout << "You overdrank by a bit, but feel refreshed." << endl;
+                } else{
+                    std::cout << "You feel refreshed, but still wounded.." << endl;
+                }
+        
+            } else {
+                std::cout << "No potions!" << endl;
+            }
+            break;
+
+        case 4:
+            std::cout << "Status: " << endl;
+            std::cout << "Name: " << player.playerName << " Race: " << player.playerRace << " Class: " << player.playerClass << " HP: " << player.currentPlayerHealth << " ATK: " << player.playerDamage << " DEF: " << player.playerDefence << " EXP: " << player.playerExperience << endl;
             break;
         default:
-            cout << "You input the wrong thing, try again!" << endl;
-    }
-    return;
-}
-
-//Monster Turn
-void combatTurn(){
-    int currentPlayerHealth;
-    while (true)
-    {
-        combatChoice();
-        
-        int currentMonsterHealth = smallOgre.monsterHealth;
-        cout << "You hit it for " << player.playerDamage << " damage " << "with your " << player.playerWeapon << endl;
-        currentMonsterHealth -= player.playerDamage;
-        
-        cout << "The " << smallOgre.monsterName << " hits you with " << smallOgre.monsterMove1 << "!" << endl;
-        cout << "Your health is now " << currentPlayerHealth - smallOgre.monsterDamage << endl;
-
-        if (currentPlayerHealth <= 0 || currentMonsterHealth <= 0){
+            std::cout << "Try a correct option!" << endl;
             break;
-        } else {
-            cout << "The "  << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
-            cout << "Your health is " << currentPlayerHealth << endl;
         }
     }
-}
+    while (player.currentPlayerHealth > 0 && currentMonsterHealth > 0);
 
-
-//Combat loop
-void combatLoop(){
-    
-    //add while loop when ready
-    combatIntro();
-    combatTurn();
-
-    return;
 }
 
 int main() {
+    
+    std::cout << "Hello, welcome to Shidgameatoria." << endl;
+// Select your player name    
+    std::cout << "Please tell us your name." << endl;
+    std::getline(std::cin, player.playerName);
+    std::cout << "Oh, your name is " << player.playerName << "..." << endl;
 
-    //runs the player creation code
-    playerCreation();
+// Select your race
 
-    int currentPlayerHealth = player.playerHealth;
-    //runs combat loop
-    combatLoop();
+    std::cout << "What race are you? \n" << "1.Dog 2.Cat 3.Nothing" << endl;
+            
+        while (true){
+            int playerOption = 0;
+            std::cin >> playerOption;
+            switch (playerOption) {
+                case 1:
+                    std::cout << "Ah so you are a Dog lmao." << endl;
+                    player.playerRace = "Dog";
+                    player.playerHealth += 10;
+                    player.playerDamage += 10;           
+                    player.playerDefence += 5;            
+                    break;
+                case 2:
+                    std::cout << "Ah so you are a Cat... Gross." << endl;
+                    player.playerRace = "Cat";
+                    player.playerHealth += 7;
+                    player.playerDamage += 8;           
+                    player.playerDefence += 10; 
+                    break;
+                case 3:
+                    std::cout << "Ah so you are a, what? You're a what?" << endl;
+                    player.playerRace = "Nothing";
+                    player.playerHealth += 5;
+                    player.playerDamage += 5;           
+                    player.playerDefence += 15; 
+                    break;
+                default:
+                    std::cout << "You need to choose again." << endl;
+            }
+            if (playerOption >= 1 && playerOption <= 3){
+                break;
+            }
+        } 
+    
+// Select your class
+    std::cout << "What class are you? \n" << "1. Warrior 2. Rogue 3.Berserker" << endl;
+            while (true){
+                int playerOption = 0;
+                std::cin >> playerOption;
+                
+                switch (playerOption) {
+                    case 1:
+                        std::cout << "Your shield is pretty big, warrior." << endl;
+                        player.playerClass = "Warrior";
+                        player.playerHealth += 10;
+                        player.playerDamage += 5;           
+                        player.playerDefence += 10;   
+                        player.playerWeapon = "Sword";         
+                        break;
+                    case 2:
+                        std::cout << "Is that a dagger, rogue?" << endl;
+                        player.playerClass = "Rogue";
+                        player.playerHealth += 5;
+                        player.playerDamage += 10;           
+                        player.playerDefence += 10; 
+                        player.playerWeapon = "Dagger";
+                        break;
+                    case 3:
+                        std::cout << "Stop yelling, berserker.." << endl;
+                        player.playerClass = "Berserker";
+                        player.playerHealth += 5;
+                        player.playerDamage += 15;           
+                        player.playerDefence += 5;
+                        player.playerWeapon = "Axe";
+                        break;
+                    default:
+                        std::cout << "You need to choose again." << endl;
+                }
+                if (playerOption >= 1 && playerOption <= 3){
+                    break;
+                }
+            }  
 
-    //Outro
-    cout << "You've fought well, but game over. Your experience is: " << player.playerExperience << "." << endl;
-    cout << "Type exit to exit." << endl;
-    cout << player.playerHealth;
-    cin >> temporaryOption;
-    return 0;
-}
+// Variable check
+    std::cout << "Your name is: " << player.playerName << " and your race is " << player.playerRace << " and your class is " << player.playerClass << "." << endl;
+    std::cout << "Your stats are: \n" << "HP: " << player.playerHealth << "\n" << "ATK: " << player.playerDamage << "\n" << "DEF: " << player.playerDefence << endl;
+    std::cout << "Your weapon is " << player.playerWeapon << " and your experience is " << player.playerExperience << "." << endl;
+    std::cout << "Good luck, hope you chose well!" << endl;
+
+//rest hard code
+
+    std::cout << "You find yourself being able to at the precipice of boredom. Press 1 for your adventure." << endl;
+    player.currentPlayerHealth = player.playerHealth;
+    int playerOption = 0;
+    std::cin >> playerOption;
+    if (playerOption == 1){
+        std::cout << "You go for a wander" << endl;
+    } else {
+        std::cout << "You chase a squirrel into the woods" << endl;
+    }
+    
+//combat function
+    do {
+        combatFunc();
+        rpwFunc();            
+    }while (player.currentPlayerHealth > 0);
+
+std::cout << "End of code";
+    
+    
+} 
