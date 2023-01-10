@@ -5,20 +5,15 @@ using namespace std;
 //temp option for ending the program
 string temporaryOption = "";
 
-void playerCreationInsert(){
-    Player player{"","","","",0,0,0,0};
-    player.playerCreation();
-    return;
-}
-
-
-
-
 
 //Intro to fight
 void combatIntro(){
     cout << "Oh no, it's a fuckin' " << smallOgre.monsterName << ". " << "It has " << smallOgre.monsterHealth << "HP." << endl;
     //cout << "Your health is " << currentPlayerHealth << "." << endl;
+    smallOgre;
+    player;
+    int currentPlayerHealth = player.playerHealth;
+    int currentMonsterHealth = smallOgre.monsterHealth;
     return;
 }
 
@@ -49,15 +44,26 @@ void combatChoice(){
 }
 
 //Monster Turn
-void monsterTurn(){
-    int currentPlayerHealth = player.playerHealth;
-    int currentMonsterHealth = smallOgre.monsterHealth;
-    cout << "You hit it for " << player.playerDamage << " damage " << "with your " << player.playerWeapon << endl;
-    currentMonsterHealth -= player.playerDamage;
-    cout << "The "  << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
-    cout << "The " << smallOgre.monsterName << " hits you with " << smallOgre.monsterMove1 << "!" << endl;
-    cout << "Your health is " << currentPlayerHealth << endl;
+void combatTurn(){
+    int currentPlayerHealth;
+    while (true)
+    {
+        combatChoice();
+        
+        int currentMonsterHealth = smallOgre.monsterHealth;
+        cout << "You hit it for " << player.playerDamage << " damage " << "with your " << player.playerWeapon << endl;
+        currentMonsterHealth -= player.playerDamage;
+        
+        cout << "The " << smallOgre.monsterName << " hits you with " << smallOgre.monsterMove1 << "!" << endl;
+        cout << "Your health is now " << currentPlayerHealth - smallOgre.monsterDamage << endl;
 
+        if (currentPlayerHealth <= 0 || currentMonsterHealth <= 0){
+            break;
+        } else {
+            cout << "The "  << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
+            cout << "Your health is " << currentPlayerHealth << endl;
+        }
+    }
 }
 
 
@@ -66,8 +72,7 @@ void combatLoop(){
     
     //add while loop when ready
     combatIntro();
-    combatChoice();
-    monsterTurn();
+    combatTurn();
 
     return;
 }
@@ -75,7 +80,7 @@ void combatLoop(){
 int main() {
 
     //runs the player creation code
-    playerCreationInsert();
+    playerCreation();
 
     int currentPlayerHealth = player.playerHealth;
     //runs combat loop

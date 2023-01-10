@@ -13,8 +13,10 @@ class Player {
         int playerHealth = 0;
         int playerDamage = 0;
         int playerDefence = 0;
-        int playerExperience = 0;    
+        int playerExperience = 0;
+};  
 //playercreation function
+Player player{"","","","",0,0,0,0};
         void playerCreation() {
 // Select your player name
             std::string playerName ="";
@@ -31,24 +33,24 @@ class Player {
                 switch (playerOption) {
                     case 1:
                         std::cout << "Ah so you are a Dog lmao." << endl;
-                        playerRace = "Dog";
-                        playerHealth = 10;
-                        playerDamage = 10;           
-                        playerDefence = 5;            
+                        player.playerRace = "Dog";
+                        player.playerHealth += 10;
+                        player.playerDamage += 10;           
+                        player.playerDefence += 5;            
                         break;
                     case 2:
                         std::cout << "Ah so you are a Cat... Gross." << endl;
-                        playerRace = "Cat";
-                        playerHealth = 7;
-                        playerDamage = 8;           
-                        playerDefence = 10; 
+                        player.playerRace = "Cat";
+                        player.playerHealth += 7;
+                        player.playerDamage += 8;           
+                        player.playerDefence += 10; 
                         break;
                     case 3:
                         std::cout << "Ah so you are a, what? You're a what?" << endl;
-                        playerRace = "Nothing";
-                        playerHealth = 5;
-                        playerDamage = 5;           
-                        playerDefence = 15; 
+                        player.playerRace = "Nothing";
+                        player.playerHealth += 5;
+                        player.playerDamage += 5;           
+                        player.playerDefence += 15; 
                         break;
                     default:
                         std::cout << "You need to choose again." << endl;
@@ -66,27 +68,27 @@ class Player {
                 switch (playerOption) {
                     case 1:
                         std::cout << "Your shield is pretty big, warrior." << endl;
-                        playerClass = "Warrior";
-                        playerHealth = 10;
-                        playerDamage = 5;           
-                        playerDefence = 10;   
-                        this->playerWeapon = "Sword";         
+                        player.playerClass = "Warrior";
+                        player.playerHealth += 10;
+                        player.playerDamage += 5;           
+                        player.playerDefence += 10;   
+                        player.playerWeapon = "Sword";         
                         break;
                     case 2:
                         std::cout << "Is that a dagger, rogue?" << endl;
-                        playerClass = "Rogue";
-                        playerHealth = 5;
-                        playerDamage = 10;           
-                        playerDefence = 10; 
-                        playerWeapon = "Dagger";
+                        player.playerClass = "Rogue";
+                        player.playerHealth += 5;
+                        player.playerDamage += 10;           
+                        player.playerDefence += 10; 
+                        player.playerWeapon = "Dagger";
                         break;
                     case 3:
                         std::cout << "Stop yelling, berserker.." << endl;
-                        playerClass = "Berserker";
-                        playerHealth = 5;
-                        playerDamage = 15;           
-                        playerDefence = 5;
-                        playerWeapon = "Axe";
+                        player.playerClass = "Berserker";
+                        player.playerHealth += 5;
+                        player.playerDamage += 15;           
+                        player.playerDefence += 5;
+                        player.playerWeapon = "Axe";
                         break;
                     default:
                         std::cout << "You need to choose again." << endl;
@@ -98,10 +100,9 @@ class Player {
         }
 // Information check
 void playerInfo() {
-            std::cout << "Your name is: " << playerName << " and your race is " << playerRace << " and your class is " << playerClass << "." << endl;
-            std::cout << "Your stats are: \n" << "HP: " << playerHealth << "\n" << "ATK: " << playerDamage << "\n" << "DEF: " << playerDefence << endl;
+            std::cout << "Your name is: " << player.playerName << " and your race is " << player.playerRace << " and your class is " << player.playerClass << "." << endl;
+            std::cout << "Your stats are: \n" << "HP: " << player.playerHealth << "\n" << "ATK: " << player.playerDamage << "\n" << "DEF: " << player.playerDefence << endl;
             std::cout << "Good luck, hope you chose well!" << endl;
     };
-};
 
-Player player;
+
