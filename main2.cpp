@@ -19,6 +19,32 @@ class Player {
 
 Player player;
 
+//Rest, potions, wander function
+
+void rpwFunc(){
+
+    cout << "You find yourself being able to choose between 1. Resting (Heal 40% hp) 2. Collecting 3 potions 3. Find a new enemy" << endl;
+    float currentPlayerHp = player.playerHealth;
+    int playerOption = 0;
+    cin >> playerOption; 
+    switch(playerOption) {
+        case 1:
+            currentPlayerHp += player.playerHealth / 100 * 40;
+            cout << currentPlayerHp;
+            break;
+        case 2:
+            currentPotions += 3;
+            cout << currentPotions;
+            break;
+        case 3:
+            cout << "You go for a wander" << endl;
+            break;
+        default:
+            cout << "Try a correct option" << endl;
+            break;
+    }
+}
+
 void combatFunc(){
     int playerOption = 0;
     float currentPlayerHealth = player.playerHealth;
@@ -54,11 +80,17 @@ void combatFunc(){
 
         case 3:
             if (currentPotions > 0) {
-                std::cout << "You drink a potion and feel refreshed!" << endl;
-                currentPlayerHealth += 10;
-                currentPotions -= 1;
-                std::cout << "Your health is now: " << currentPlayerHealth << endl;
-                break;
+                if(currentPlayerHealth >= player.playerHealth){
+                    currentPlayerHealth = player.playerHealth;
+                    cout << "You have overhealed." << endl;
+                    break;
+                } else {
+                    std::cout << "You drink a potion and feel refreshed!" << endl;
+                    currentPlayerHealth += 10;
+                    currentPotions -= 1;                    
+                    std::cout << "Your health is now: " << currentPlayerHealth << endl;
+                    break;
+                }
             } else {
                 std::cout << "No potions!" << endl;
             }
@@ -167,8 +199,34 @@ int main() {
     std::cout << "Your weapon is " << player.playerWeapon << " and your experience is " << player.playerExperience << "." << endl;
     std::cout << "Good luck, hope you chose well!" << endl;
 
-    combatFunc();
-    std::cout << "End of code";
-// Combat introduction function
+//rest function
 
+    cout << "You find yourself being able to choose between 1. Resting (Heal 40% hp) 2. Collecting 3 potions 3. Find a new enemy" << endl;
+    float currentPlayerHp = player.playerHealth;
+    int playerOption = 0;
+    cin >> playerOption; 
+    switch(playerOption) {
+        case 1:
+            currentPlayerHp += player.playerHealth / 100 * 40;
+            cout << currentPlayerHp;
+            break;
+        case 2:
+            currentPotions += 3;
+            cout << currentPotions;
+            break;
+        case 3:
+            cout << "You go for a wander" << endl;
+            break;
+        default:
+            cout << "Try a correct option" << endl;
+            break;
+    }
+
+//combat function
+    while(currentPlayerHp >= 0) {
+    combatFunc();
+    rpwFunc();
+    }
+    
+    std::cout << "End of code";
 }
