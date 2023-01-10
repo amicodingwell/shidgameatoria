@@ -7,9 +7,9 @@ using namespace std;
 class Monster {
     public:
         std::string monsterName = "";
-        int monsterHealth = 0;
-        int monsterDamage = 0;
-        int monsterDefence = 0;
+        float monsterHealth = 0;
+        float monsterDamage = 0;
+        float monsterDefence = 0;
         string monsterMove1 = "";
         string monsterMove2 = "";
         int monsterListNum = 0;
@@ -17,10 +17,10 @@ class Monster {
 
 
 //monsters
-Monster smallOgre{"Small Ogre", 50, 3, 3, "measly club swing", "headbutt", 1};
-Monster largeOgre{"Large Ogre", 70, 5, 4, "heavy club swing", "headcrusher", 2};
-Monster smallSpider{"Small Spider", 30, 1, 1, "pinprick bite", "venom drizzle", 3};
-Monster largeSpider{"Large Spider", 40, 2, 2, "owie bite", "venom plunge", 4};
+Monster smallOgre{"Small Ogre", 50, 3, 2, "measly club swing", "headbutt", 1};
+Monster largeOgre{"Large Ogre", 70, 5, 2.3, "heavy club swing", "headcrusher", 2};
+Monster smallSpider{"Small Spider", 30, 1, 1.4, "pinprick bite", "venom drizzle", 3};
+Monster largeSpider{"Large Spider", 40, 2, 1.6, "owie bite", "venom plunge", 4};
 
 //monster list
 void MList() {
