@@ -70,7 +70,7 @@ class Player {
                         playerHealth = 10;
                         playerDamage = 5;           
                         playerDefence = 10;   
-                        playerWeapon = "Sword";         
+                        this->playerWeapon = "Sword";         
                         break;
                     case 2:
                         std::cout << "Is that a dagger, rogue?" << endl;
@@ -101,7 +101,7 @@ void playerInfo() {
             std::cout << "Your name is: " << playerName << " and your race is " << playerRace << " and your class is " << playerClass << "." << endl;
             std::cout << "Your stats are: \n" << "HP: " << playerHealth << "\n" << "ATK: " << playerDamage << "\n" << "DEF: " << playerDefence << endl;
             std::cout << "Good luck, hope you chose well!" << endl;
-    };      
+    };
 };
 
 Player player;

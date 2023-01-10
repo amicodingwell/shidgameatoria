@@ -11,16 +11,14 @@ void playerCreationInsert(){
     return;
 }
 
-//attempting to occupy currentPlayerHealth with max health
- int currentPlayerHealth = player.playerHealth;
- int currentMonsterHealth = smallOgre.monsterHealth;  
+
 
 
 
 //Intro to fight
 void combatIntro(){
     cout << "Oh no, it's a fuckin' " << smallOgre.monsterName << ". " << "It has " << smallOgre.monsterHealth << "HP." << endl;
-    cout << "Your health is " << currentPlayerHealth << "." << endl;
+    //cout << "Your health is " << currentPlayerHealth << "." << endl;
     return;
 }
 
@@ -52,9 +50,13 @@ void combatChoice(){
 
 //Monster Turn
 void monsterTurn(){
-    cout << "You hit it for " << player.playerDamage << "damage!" << endl;
+    int currentPlayerHealth = player.playerHealth;
+    int currentMonsterHealth = smallOgre.monsterHealth;
+    cout << "You hit it for " << player.playerDamage << " damage " << "with your " << player.playerWeapon << endl;
     currentMonsterHealth -= player.playerDamage;
+    cout << "The "  << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
     cout << "The " << smallOgre.monsterName << " hits you with " << smallOgre.monsterMove1 << "!" << endl;
+    cout << "Your health is " << currentPlayerHealth << endl;
 
 }
 
@@ -62,9 +64,10 @@ void monsterTurn(){
 //Combat loop
 void combatLoop(){
     
-
+    //add while loop when ready
     combatIntro();
     combatChoice();
+    monsterTurn();
 
     return;
 }
@@ -73,6 +76,8 @@ int main() {
 
     //runs the player creation code
     playerCreationInsert();
+
+    int currentPlayerHealth = player.playerHealth;
     //runs combat loop
     combatLoop();
 
