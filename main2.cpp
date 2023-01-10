@@ -24,31 +24,43 @@ Player player;
 
 void rpwFunc(){
 
-    std::cout << "Status: " << endl;
-    std::cout << "Name: " << player.playerName << " Race: " << player.playerRace << " Class: " << player.playerClass << " HP: " << player.currentPlayerHealth << " ATK: " << player.playerDamage << " DEF: " << player.playerDefence << " EXP: " << player.playerExperience << endl;
-    std::cout << "You find yourself being able to choose between 1. Resting (Heal 40% hp) or 2. Collecting 3 potions" << endl;
-    int playerOption = 0;
-    std::cin >> playerOption; 
-    if (playerOption == 1){
-        player.currentPlayerHealth += player.playerHealth / 100 * 40;
-        if (player.currentPlayerHealth >= player.playerHealth){
-            player.currentPlayerHealth = player.playerHealth;
-            std::cout << "You feel rested, you go for a wander." << endl;
-        }else{            
-            std::cout << "You feel rested, but still a bit wounded. You go for a wander." << endl;
-        }
-    } else if (playerOption == 2){
-        currentPotions += 3;
-        std::cout << "You have " << currentPotions << " potions. You go for a wander." << endl;
+   
+    do { 
+        if (player.currentPlayerHealth >= 1){
+        std::cout << "Status: " << endl;
+        std::cout << "Name: " << player.playerName << " Race: " << player.playerRace << " Class: " << player.playerClass << " HP: " << player.currentPlayerHealth << " ATK: " << player.playerDamage << " DEF: " << player.playerDefence << " EXP: " << player.playerExperience << endl;
+        std::cout << "You find yourself being able to choose between 1. Resting (Heal 40% hp) or 2. Collecting 3 potions" << endl;
+        int playerOption = 0;
+        std::cin >> playerOption;
+
+            if (playerOption == 1){
+                player.currentPlayerHealth += player.playerHealth / 100 * 40;
+                if (player.currentPlayerHealth >= player.playerHealth){
+                    player.currentPlayerHealth = player.playerHealth;
+                    std::cout << "You feel rested, you go for a wander." << endl;
+                    break;
+                }else{            
+                    std::cout << "You feel rested, but still a bit wounded. You go for a wander." << endl;
+                    break;
+                }
+            } else if (playerOption == 2){
+                currentPotions += 3;
+                std::cout << "You have " << currentPotions << " potions. You go for a wander." << endl;
+                break;
+            } else {
+                std::cout << "Have it your way." << endl;
+                break;
+            }           
     } else {
-        std::cout << "Have it your way." << endl;
-    }           
-    
+        std::cout << "You have died. Welcome to hell." << endl;
+            
+    }
+}while(player.currentPlayerHealth >= 1);
 }
+
 
 void combatFunc(){
     int playerOption = 0;
-    //float currentPlayerHealth = player.playerHealth;
     float currentMonsterHealth = smallOgre.monsterHealth;
     float combatMonsterDamage = 0;
     float combatPlayerDamage = 0;
@@ -81,17 +93,16 @@ void combatFunc(){
 
         case 3:
             if (currentPotions > 0) {
+
+                player.currentPlayerHealth += 10;
+                
                 if(player.currentPlayerHealth >= player.playerHealth){
                     player.currentPlayerHealth = player.playerHealth;
-                    cout << "You have overhealed." << endl;
-                    break;
-                } else {
-                    std::cout << "You drink a potion and feel refreshed!" << endl;
-                    player.currentPlayerHealth += 10;
-                    currentPotions -= 1;                    
-                    std::cout << "Your health is now: " << player.currentPlayerHealth << endl;
-                    break;
+                    std::cout << "You overdrank by a bit, but feel refreshed." << endl;
+                } else{
+                    std::cout << "You feel refreshed, but still wounded.." << endl;
                 }
+        
             } else {
                 std::cout << "No potions!" << endl;
             }
@@ -124,7 +135,7 @@ int main() {
             
         while (true){
             int playerOption = 0;
-            cin >> playerOption;
+            std::cin >> playerOption;
             switch (playerOption) {
                 case 1:
                     std::cout << "Ah so you are a Dog lmao." << endl;
@@ -159,7 +170,7 @@ int main() {
     std::cout << "What class are you? \n" << "1. Warrior 2. Rogue 3.Berserker" << endl;
             while (true){
                 int playerOption = 0;
-                cin >> playerOption;
+                std::cin >> playerOption;
                 
                 switch (playerOption) {
                     case 1:
@@ -202,10 +213,10 @@ int main() {
 
 //rest hard code
 
-    cout << "You find yourself being able to at the precipice of boredom. Press 1 for your adventure." << endl;
+    std::cout << "You find yourself being able to at the precipice of boredom. Press 1 for your adventure." << endl;
     player.currentPlayerHealth = player.playerHealth;
     int playerOption = 0;
-    cin >> playerOption;
+    std::cin >> playerOption;
     if (playerOption == 1){
         std::cout << "You go for a wander" << endl;
     } else {
@@ -213,14 +224,12 @@ int main() {
     }
     
 //combat function
-    while(true) {
-        if (player.currentPlayerHealth < 1) {
-            break;
-        }else {
-            combatFunc();
-            rpwFunc();            
-            }
-        }
-    std::cout << "End of code";
-}
+    do {
+        combatFunc();
+        rpwFunc();            
+    }while (player.currentPlayerHealth > 0);
+
+std::cout << "End of code";
     
+    
+} 
