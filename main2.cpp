@@ -1,7 +1,10 @@
 #include <iostream>
 #include "monsters.hpp"
+#include <ctime>
 using namespace std;
 
+int potions = 3;
+int currentPotions = potions;
 class Player {
     public:
     string playerName = "";
@@ -18,41 +21,59 @@ Player player;
 
 void combatFunc(){
     int playerOption = 0;
-    int currentPlayerHealth = player.playerHealth;
-    int currentMonsterHealth = smallOgre.monsterHealth;
+    float currentPlayerHealth = player.playerHealth;
+    float currentMonsterHealth = smallOgre.monsterHealth;
     float combatMonsterDamage = 0;
     float combatPlayerDamage = 0;
 
     std::cout << "Oh shit it's a " << smallOgre.monsterName << endl;
     std::cout << "You have " << currentPlayerHealth << " HP. What will you do?" << endl;
 
-    while (currentPlayerHealth != 0 || smallOgre.monsterHealth !=0)
-    {
-        std::cout << "Would you like to 1. Attack 2. Defend 3. Potion?";
+    do {
+        std::cout << "Would you like to 1. Attack 2. Defend 3. Potion 4. Status";
         std::cin >> playerOption;
         switch (playerOption){
         case 1:
-            
             std::cout << "You attack the enemy for " << (player.playerDamage / smallOgre.monsterDefence) << " damage." << endl;
             combatPlayerDamage = (player.playerDamage / smallOgre.monsterDefence);
             currentMonsterHealth -= combatPlayerDamage;
-            std::cout << smallOgre.monsterName << "'s health is" << currentMonsterHealth << endl;
+            std::cout << smallOgre.monsterName << "'s health is " << currentMonsterHealth << endl;
 
             std::cout << "You take " << (player.playerDefence / smallOgre.monsterDamage) << " damage." << endl;
             combatMonsterDamage = (smallOgre.monsterDamage / player.playerDefence);
             currentPlayerHealth -= combatMonsterDamage;
             std::cout << "Your health is " << currentPlayerHealth << "." << endl;
             break;
+
         case 2:
-            std::cout << "You defend from the enemy's attack. You take " << (player.playerDefence / smallOgre.monsterDamage / 2) << " damage." << endl;
-            currentPlayerHealth -= (player.playerDefence / smallOgre.monsterDamage / 2);
+            //std::cout << "You defend from the enemy's attack. You take " << currentPlayerHealth - player.playerHealth + (p) << " damage." << endl;
+            currentPlayerHealth -= (player.playerDefence - (smallOgre.monsterDamage / 0.5));
+            std::cout << "You defend from the enemy's attack." << endl;
             std::cout << "Your health is " << currentPlayerHealth << "." << endl;
+            break;
+
+        case 3:
+            if (currentPotions > 0) {
+                std::cout << "You drink a potion and feel refreshed!" << endl;
+                currentPlayerHealth += 10;
+                currentPotions -= 1;
+                std::cout << "Your health is now: " << currentPlayerHealth << endl;
+                break;
+            } else {
+                std::cout << "No potions!" << endl;
+            }
+            break;
+
+        case 4:
+            std::cout << "Status: " << endl;
+            std::cout << "Name: " << player.playerName << " Race: " << player.playerRace << " Class: " << player.playerClass << " HP: " << currentPlayerHealth << " ATK: " << player.playerDamage << " DEF: " << player.playerDefence << " EXP: " << player.playerExperience << endl;
+            break;
         default:
             std::cout << "Try a correct option!" << endl;
             break;
         }
     }
-    
+    while (currentPlayerHealth > 0 && currentMonsterHealth > 0);
 
 }
 
@@ -147,7 +168,7 @@ int main() {
     std::cout << "Good luck, hope you chose well!" << endl;
 
     combatFunc();
-
+    std::cout << "End of code";
 // Combat introduction function
 
 }
